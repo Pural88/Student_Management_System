@@ -4,36 +4,47 @@ This is a Student Management System built using Flask (Python) and MySQL.
 
 ## Prerequisites
 - Python 3.x
-- MySQL Server (e.g., XAMPP, WAMP, or standalone MySQL)
+- MySQL Server (e.g., MySQL Workbench, XAMPP, or WAMP)
 
-## How to run locally
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Pural88/Student_Management_System.git
-   cd Student_Management_System/"student management"
+## 🚀 How to Run Locally (Using MySQL Workbench)
+
+### Step 1: Set up the Database
+1. Open **MySQL Workbench**, connect to your local instance, and log in.
+2. In the top toolbar, click the **Create a new schema** button (the yellow cylinder with a plus icon).
+3. Name the schema **`students`** (all lowercase) and click **Apply**, then **Apply** again.
+4. Go to **File -> Open SQL Script...** and select the `students.sql` file from the `student management` folder.
+5. In the left "Schemas" panel, right-click the `students` schema you just created and select **Set as Default Schema** (it will turn bold).
+6. Click the yellow lightning bolt icon (⚡) at the top of the script window to execute the script and create your tables.
+
+### Step 2: Update your Database Password (If applicable)
+By default, the code expects your MySQL root user to not have a password. If you typed in a password to log into MySQL Workbench, you must update the code:
+1. Open `student management/main.py`.
+2. Go to line 26:
+   ```python
+   app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:@localhost/students'
    ```
-
-2. **Install requirements:**
-   Install the required Python packages using pip:
-   ```bash
-   pip install -r requirements.txt
+3. If your password is, for example, `1234`, change it to:
+   ```python
+   app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:1234@localhost/students'
    ```
-   *(Note: It is recommended to use a virtual environment)*
+4. Save the file.
 
-3. **Database Setup:**
-   - Create a MySQL database (check `main.py` for the required database name, usually it matches what is in `students.sql` or the connection string in `main.py`).
-   - Import the `students.sql` file into your MySQL database to set up the necessary tables.
+### Step 3: Install Required Packages
+Open a new terminal window inside the `student management` folder and install the necessary Python dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-4. **Run the Application:**
-   Run the Flask server:
-   ```bash
-   python main.py
-   ```
-   The application will typically start on `http://127.0.0.1:5000/`. Open this URL in your web browser.
+### Step 4: Run the Application
+In that same terminal, start the server by running:
+```bash
+python main.py
+```
+Your terminal will print out a local web address (usually `http://127.0.0.1:5000/`). Ctrl-click that link or open it in your web browser to view your project!
 
-## Deployment
-While this project can be run locally for development and testing, it is fully deployable to cloud platforms like Heroku, AWS, or PythonAnywhere. Ensure you configure your production database connection strings and environment variables appropriately before deploying.
+---
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
